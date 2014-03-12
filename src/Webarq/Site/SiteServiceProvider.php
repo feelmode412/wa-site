@@ -19,7 +19,6 @@ class SiteServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('webarq/site');
-		require_once 'helpers.php';
 	}
 
 	/**
