@@ -21,6 +21,9 @@ Route::get('generate-c-routes', function()
 			? $route = str_plural($route)
 			: str_replace('admin/', 'admin-cp/', $route);
 
+		if (strpos($controller, '\\') !== false)
+			$controller = '\\'.$controller;
+
 		fwrite($handle, "\t'".$route."' => '".$controller."',\r\n");
 
 		$routes .= $route.' ('.$controller.')<br/>';
