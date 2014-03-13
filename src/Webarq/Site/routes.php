@@ -4,7 +4,7 @@
 Route::get('generate-c-routes', function()
 {
 	$file = app_path().DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'c_routes.php';
-	unlink($file);
+	@unlink($file);
 	$handle = fopen($file, 'w');
 	fwrite($handle, "<?php\r\n");
 	fwrite($handle, "return array(\r\n");
