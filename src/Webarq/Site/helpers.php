@@ -42,6 +42,34 @@ function admin_url($path = null)
 
 /*
 |--------------------------------------------------------------------------
+| Clean Environment Detection
+|--------------------------------------------------------------------------
+|
+| Create a file under / directory, name it [server_name].env.txt.
+| Then write down your environment name in it. For example: "local", "test-server"
+| Don't forget to Git-exclude the file.
+| 
+*/
+function detect_env()
+{
+
+	$envFile = gethostname().'.env.txt';
+	if (file_exists('index.php') && file_exists('../'.$envFile)) // Dev, web
+	{
+		return file_get_contents('../'.$envFile);
+	}
+	elseif (file_exists($envFile)) // Dev, CLI (artisan)
+	{
+		return file_get_contents($envFile);
+	}
+	else // Prod
+	{
+		return 'production';
+	}
+}
+
+/*
+|--------------------------------------------------------------------------
 | Locale Helper for Database Content
 |--------------------------------------------------------------------------
 |
