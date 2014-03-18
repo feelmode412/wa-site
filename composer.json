@@ -1,0 +1,8 @@
+{
+    "name": "webarq/site",
+    "version": "dev-master",
+    "dist": {
+        "url": "https://bitbucket.org/webarq/site.git",
+        "type": "git"
+    }
+}
