@@ -16,10 +16,10 @@ Route::get('generate-c-routes', function()
 		$file = str_replace(app_path().DIRECTORY_SEPARATOR.'controllers'.DIRECTORY_SEPARATOR, '', $_file);
 		$controller = str_replace('.php', '', $file);
 
-		$route = str_replace(DIRECTORY_SEPARATOR, '/', strtolower(str_replace('Controller', '', $controller)));
-		$route = (strpos($route, 'admin/') !== 0)
-			? $route = str_plural($route)
-			: str_replace('admin/', 'admin-cp/', $route);
+		$_route = str_replace(DIRECTORY_SEPARATOR, '/', strtolower(str_replace('Controller', '', $controller)));
+		$route = ($_route === 'admin' || substr($_route, 0, 6) === 'admin/')
+			? substr_replace($_route, 'admin-cp', 0, 5)
+			: str_plural($_route);
 
 		fwrite($handle, "\t'".$route."' => '".$controller."',\r\n");
 
