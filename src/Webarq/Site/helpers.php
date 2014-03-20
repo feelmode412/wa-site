@@ -95,3 +95,38 @@ function list_lang($fieldName)
 		? $fieldName
 		: $fieldName.'_locale_'.$locale;
 }
+
+function handle_upload($inputName, $prefix, $model = null, $resizeWidth = null, $resizeHeight = null, $ratio = true)
+{
+	if (Input::hasFile($inputName))
+	{
+		$path = public_path('contents').'/';
+		$file = Input::file($inputName);
+		$fileName = $prefix.'-'.Str::random().'.'.$file->getClientOriginalExtension();
+		if ($resizeWidth || $resizeHeight)
+		{
+			Image::make($file->getRealPath())
+				->resize($resizeWidth, $resizeHeight, $ratio)->save($path.$fileName);
+		}
+		else
+		{
+			$file->move($path, $fileName);	
+		}
+		
+		if ($model && $model->{$inputName})
+		{
+			// Use "@" in case the file is missing
+			@unlink($path.$model->{$inputName});
+		}
+		
+		return $fileName;
+	}
+	elseif ($model) // File not uploaded by user on Edit mode
+	{
+		return $model->{$inputName};
+	}
+	else // File not uploaded by user on Add mode
+	{
+		return null;
+	}
+}
