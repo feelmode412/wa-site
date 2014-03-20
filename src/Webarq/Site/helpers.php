@@ -96,6 +96,11 @@ function list_lang($fieldName)
 		: $fieldName.'_locale_'.$locale;
 }
 
+/**
+ * This helper does not handle validation.
+ * You should make validation on the controller as usual for file upload.
+ * 
+ */
 function handle_upload($inputName, $prefix, $model = null, $resizeWidth = null, $resizeHeight = null, $ratio = true)
 {
 	if (Input::hasFile($inputName))
