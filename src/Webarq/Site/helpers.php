@@ -40,11 +40,67 @@ function admin_url($path = null)
 	return $url;
 }
 
-function currency_format($number, $currency = 'IDR')
+/*
+|--------------------------------------------------------------------------
+| Clean Environment Detection
+|--------------------------------------------------------------------------
+|
+| Create a file under / directory, name it [server_name].env.txt.
+| Then write down your environment name in it. For example: "local", "test-server"
+| Don't forget to Git-exclude the file.
+| 
+*/
+function detect_env()
 {
-	return $currency.' '.number_format($number, 2, '.', ',');
+
+	$envFile = gethostname().'.env.txt';
+	if (file_exists('index.php') && file_exists('../'.$envFile)) // Dev, web
+	{
+		return file_get_contents('../'.$envFile);
+	}
+	elseif (file_exists($envFile)) // Dev, CLI (artisan)
+	{
+		return file_get_contents($envFile);
+	}
+	else // Prod
+	{
+		return 'production';
+	}
 }
 
+/*
+|--------------------------------------------------------------------------
+| Locale Helper for Database Content
+|--------------------------------------------------------------------------
+|
+| For example: returns the field "title_locale_id" when the locale session
+| is "id"
+|
+*/
+
+function lang($row, $fieldName)
+{
+	$locale = App::getLocale();
+
+	return ($locale === 'en')
+		? $row->{$fieldName}
+		: ($row->{$fieldName.'_locale_'.$locale}) ?: $row->{$fieldName};
+}
+
+function list_lang($fieldName)
+{
+	$locale = App::getLocale();
+
+	return ($locale === 'en')
+		? $fieldName
+		: $fieldName.'_locale_'.$locale;
+}
+
+/**
+ * This helper does not handle validation.
+ * You should make validation on the controller as usual for file upload.
+ * 
+ */
 function handle_upload($inputName, $prefix, $model = null, $resizeWidth = null, $resizeHeight = null, $ratio = true)
 {
 	if (Input::hasFile($inputName))
@@ -78,32 +134,4 @@ function handle_upload($inputName, $prefix, $model = null, $resizeWidth = null, 
 	{
 		return null;
 	}
-}
-
-/*
-|--------------------------------------------------------------------------
-| Locale Helper for Database Content
-|--------------------------------------------------------------------------
-|
-| For example: returns the field "title_locale_id" when the locale session
-| is "id"
-|
-*/
-
-function lang($row, $fieldName)
-{
-	$locale = App::getLocale();
-
-	return ($locale === 'en')
-		? $row->{$fieldName}
-		: ($row->{$fieldName.'_locale_'.$locale}) ?: $row->{$fieldName};
-}
-
-function list_lang($fieldName)
-{
-	$locale = App::getLocale();
-
-	return ($locale === 'en')
-		? $fieldName
-		: $fieldName.'_locale_'.$locale;
 }
