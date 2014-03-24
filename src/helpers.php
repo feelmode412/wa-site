@@ -19,27 +19,6 @@ function __($key, $options = array())
 	return $t;
 }
 
-/*
-|--------------------------------------------------------------------------
-| Custom Helper for Admin Panel
-|--------------------------------------------------------------------------
-|
-| A url()-like helper for admin panel.
-| 
-|
-*/
-
-function admin_url($path = null)
-{
-	$url = $_SERVER['SCRIPT_NAME'].'/admin-cp';
-	if ($path)
-	{
-		$url .= '/'.$path;
-	}
-	
-	return $url;
-}
-
 function currency_format($number, $currency = 'IDR')
 {
 	return $currency.' '.number_format($number, 2, '.', ',');
