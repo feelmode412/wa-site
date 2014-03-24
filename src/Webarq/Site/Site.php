@@ -34,5 +34,13 @@ class Site {
 		header('Content-type: text/text');
 		die(file_get_contents($cRouteFile));
 	}
+
+	public function registerControllerRoutes()
+	{
+		foreach (\Config::get('c_routes') as $route => $controller)
+		{
+			\Route::controller($route, $controller);
+		}
+	}
 	
 }
