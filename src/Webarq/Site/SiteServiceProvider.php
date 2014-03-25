@@ -19,6 +19,10 @@ class SiteServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('webarq/site');
+		\App::bind('site\form', function()
+		{
+			return new \Webarq\Site\Form();
+		});
 		include __DIR__.'/../../helpers.php';
 		include __DIR__.'/../../routes.php';
 	}
