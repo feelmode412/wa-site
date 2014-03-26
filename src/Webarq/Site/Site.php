@@ -11,6 +11,7 @@ class Site {
 		fwrite($handle, "return array(\r\n");
 
 		$_files = \File::allFiles(app_path().DIRECTORY_SEPARATOR.'controllers');
+		$adminUrlPrefix = (\Config::get('admin::admin.urlPrefix')) ?: 'admin-cp';
 		foreach ($_files as $_file)
 		{
 			$file = str_replace(app_path().DIRECTORY_SEPARATOR.'controllers'.DIRECTORY_SEPARATOR, '', $_file);
@@ -19,7 +20,7 @@ class Site {
 			$route = str_replace(DIRECTORY_SEPARATOR, '/', strtolower(str_replace('Controller', '', $controller)));
 			if ($route === 'admin' || substr($route, 0, 6) === 'admin/')
 			{
-				$route = substr_replace($route, 'admin-cp', 0, 5);
+				$route = substr_replace($route, $adminUrlPrefix, 0, 5);
 			}
 			elseif ( ! in_array($route, array('base', 'home')))
 			{
