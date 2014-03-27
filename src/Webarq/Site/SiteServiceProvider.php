@@ -18,6 +18,9 @@ class SiteServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
+		// Let's do the hack a little
+		\Config::set('auth.model', '\Webarq\Site\User');
+
 		$this->package('webarq/site');
 		\App::bind('site\form', function()
 		{
