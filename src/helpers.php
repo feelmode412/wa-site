@@ -19,6 +19,14 @@ function __($key, $options = array())
 	return $t;
 }
 
+function append_current_url($options = array())
+{
+	parse_str($_SERVER['QUERY_STRING'], $parsedStr);
+	$queryStrings = array_merge($parsedStr, $options);
+
+	return \URL::current().'?'.http_build_query($queryStrings);
+}
+
 function currency_format($number, $currency = 'IDR')
 {
 	return $currency.' '.number_format($number, 2, '.', ',');
