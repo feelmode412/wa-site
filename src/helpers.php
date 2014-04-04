@@ -32,6 +32,11 @@ function currency_format($number, $currency = 'IDR')
 	return $currency.' '.number_format($number, 2, '.', ',');
 }
 
+function dd2($var)
+{
+	echo '<pre>'; print_r($var); die;
+}
+
 function handle_upload($inputName, $prefix, $model = null, $resizeWidth = null, $resizeHeight = null, $ratio = true)
 {
 	if (Input::hasFile($inputName))
