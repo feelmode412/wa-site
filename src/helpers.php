@@ -34,7 +34,15 @@ function currency_format($number, $currency = 'IDR')
 
 function dd2($var)
 {
-	echo '<pre>'; print_r($var); die;
+	if (in_array(gettype($var), array('boolean', 'NULL')))
+		var_dump($var);
+	else
+	{
+		echo '<pre>';
+		print_r($var);
+	}
+
+	die;
 }
 
 function handle_upload($inputName, $prefix, $model = null, $resizeWidth = null, $resizeHeight = null, $ratio = true)
