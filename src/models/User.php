@@ -2,9 +2,10 @@
 
 class User extends \User {
 
-	public function role()
+	// We shouldn't make this because Admin is a different package
+	public function admin()
 	{
-		return $this->belongsTo('\Webarq\Site\User\Role');
+		return $this->hasOne('\Webarq\Admin\Model\Admin');
 	}
 	
 }
