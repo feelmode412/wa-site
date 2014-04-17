@@ -62,7 +62,7 @@ function handle_upload($inputName, $prefix, $model = null, $resizeWidth = null, 
 			$file->move($path, $fileName);	
 		}
 		
-		if ($model && $model->{$inputName})
+		if ($model && $model->{$inputName} && substr($model->{$inputName}, 0, 8) !== 'default-')
 		{
 			// Use "@" in case the file is missing
 			@unlink($path.$model->{$inputName});
