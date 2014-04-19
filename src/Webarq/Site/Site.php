@@ -18,11 +18,12 @@ class Site {
 			$controller = str_replace('.php', '', $file);
 
 			$route = str_replace(DIRECTORY_SEPARATOR, '/', strtolower(str_replace('Controller', '', $controller)));
+			if ($route === 'base') continue;
 			if ($route === 'admin' || substr($route, 0, 6) === 'admin/')
 			{
 				$route = substr_replace($route, $adminUrlPrefix, 0, 5);
 			}
-			elseif ( ! in_array($route, array('base', 'home')))
+			elseif ( ! in_array($route, array('home')))
 			{
 				$route = str_plural($route);
 			}
