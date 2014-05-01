@@ -22,6 +22,12 @@ class SiteServiceProvider extends ServiceProvider {
 		\Config::set('auth.model', '\Webarq\Site\User');
 
 		$this->package('webarq/site');
+ 
+		\App::missing(function($exception)
+		{
+			return \Response::view('site::errors.missing', array(), 404);
+		});
+
 		\App::bind('site\form', function()
 		{
 			return new \Webarq\Site\Form();
