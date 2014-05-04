@@ -47,7 +47,7 @@ See also: [WEBARQ\Presence](http://128.199.208.157/gitlist/index.php/webarq/pres
 
 ### Merge Schema
 
-Merge `/schema.sql` to your MySQL database. It includes 2 tables:
+Merge `/schema.sql` to your MySQL database. It contains 2 tables:
 
 - settings
 - users 
