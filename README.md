@@ -45,6 +45,13 @@ See also: [WEBARQ\Presence](http://128.199.208.157/gitlist/index.php/webarq/pres
 			'Site' => 'Webarq\Site\SiteFacade',
 		);
 
+### Merge Schema
+
+Merge `/schema.sql` to your MySQL database. It includes 2 tables:
+
+- settings
+- users 
+
 ### Register The Controller Route Generator
 
 In your `/app/routes.php`, add the following line on top of others:
