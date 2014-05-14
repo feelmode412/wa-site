@@ -45,7 +45,7 @@ function dd2($var)
 	die;
 }
 
-function handle_upload($inputName, $prefix, $model = null, $resizeWidth = null, $resizeHeight = null, $ratio = true)
+function handle_upload($inputName, $prefix, $row = null, $resizeWidth = null, $resizeHeight = null, $ratio = true)
 {
 	if (Input::hasFile($inputName))
 	{
@@ -62,17 +62,17 @@ function handle_upload($inputName, $prefix, $model = null, $resizeWidth = null, 
 			$file->move($path, $fileName);	
 		}
 		
-		if ($model && $model->{$inputName} && substr($model->{$inputName}, 0, 8) !== 'default-')
+		if ($row && $row->{$inputName} && substr($row->{$inputName}, 0, 8) !== 'default-')
 		{
 			// Use "@" in case the file is missing
-			@unlink($path.$model->{$inputName});
+			@unlink($path.$row->{$inputName});
 		}
 		
 		return $fileName;
 	}
-	elseif ($model) // File not uploaded by user on Edit mode
+	elseif ($row) // File not uploaded by user on Edit mode
 	{
-		return $model->{$inputName};
+		return $row->{$inputName};
 	}
 	else // File not uploaded by user on Add mode
 	{
