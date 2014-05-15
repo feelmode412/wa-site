@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(16) NOT NULL,
   `email` varchar(254) NOT NULL,
   `password` varchar(60) NOT NULL,
+  `remember_token` varchar(60) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
