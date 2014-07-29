@@ -39,10 +39,15 @@ CREATE TABLE IF NOT EXISTS `settings` (
   `value` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `code_type` (`code`,`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table webarq-site.settings: ~0 rows (approximately)
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
+INSERT INTO `settings` (`id`, `code`, `type`, `value`) VALUES
+	(1, 'email', 'noreply', 'noreply@domain.com'),
+	(2, 'name', 'noreply', 'Web App X'),
+	(3, 'footer', 'email', '<p>&nbsp;<p>\r\n<p>Best regards,</p>'),
+	(4, 'header', 'email', 'Dear {name},<br/><br/><br/>');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 
 
