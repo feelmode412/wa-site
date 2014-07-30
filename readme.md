@@ -49,6 +49,7 @@ See also: [WEBARQ\Presence](http://128.199.208.157/gitlist/index.php/webarq/pres
 
 Merge `/src/database/schema_seeds.sql` to your MySQL database. It contains 2 tables:
 
+- email_templates
 - settings
 - users 
 
