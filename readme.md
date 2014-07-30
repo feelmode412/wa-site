@@ -11,19 +11,19 @@ See also: [WEBARQ\Presence](http://128.199.208.157/gitlist/index.php/webarq/pres
 
 ### Basic
 
-1. Make sure that your SSH public key has been registered on the private repository server (128.199.208.157).
+1. Make sure that your SSH public key has been registered on the private repository server.
 2. Add the private repository to `composer.json`:
 
 		"repositories": [
 			{
 				"type": "vcs",
-				"url": "git@128.199.208.157:/opt/git/webarq/site.git"
+				"url": "git@[server-name]:[path]/webarq/site.git"
 			}
 		]
 3. Add the dependency:
 
 		"require": {
-			"webarq/site": "dev-master"
+			"webarq/site": "1.0.*"
 		}
 4. Change `preferred-install` to `auto`:
 
@@ -47,7 +47,7 @@ See also: [WEBARQ\Presence](http://128.199.208.157/gitlist/index.php/webarq/pres
 
 ### Merge Schema
 
-Merge `/schema.sql` to your MySQL database. It contains 2 tables:
+Merge `/src/database/schema_seeds.sql` to your MySQL database. It contains 2 tables:
 
 - settings
 - users 

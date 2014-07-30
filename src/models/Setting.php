@@ -5,9 +5,7 @@ class Setting extends \Eloquent {
 	
 	public function scopeOfCodeType($query, $code, $type)
 	{
-		return $query->whereCode($code)
-			->whereType($type)
-			->first();
+		return $query->whereCode($code)->whereType($type)->first();
 	}
 
 }

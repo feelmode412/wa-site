@@ -44,5 +44,31 @@ class Site {
 			\Route::controller($route, $controller);
 		}
 	}
+
+	/**
+	* @todo Multilanguage for the header and footer
+	*
+	*/
+	function sendEmail($templateCode, $receiver, $contentVars = array())
+	{
+		$emailTemplate = Email\Template::whereCode($templateCode)->first();
+		$content = Setting::ofCodeType('header', 'email')->value
+			.$emailTemplate->content
+			.Setting::ofCodeType('footer', 'email')->value;
+		$content = str_replace('{username}', $receiver->username, $content);
+		$content = str_replace('{asset}', asset(null), $content);
+		
+		foreach ($contentVars as $var => $replacement)
+		{
+			$content = str_replace($var, $replacement, $content);
+		}
+
+		return \Mail::send('site::layouts.email.master', array('content' => $content), function($message) use ($emailTemplate, $receiver)
+		{
+			$message->from(Setting::ofCodeType('email', 'noreply')->value, Setting::ofCodeType('name', 'noreply')->value);
+			$message->to($receiver->email, $receiver->username);
+			$message->subject($emailTemplate->title);
+		});
+	}
 	
 }
