@@ -83,7 +83,10 @@ INSERT INTO `settings` (`id`, `code`, `type`, `value`) VALUES
 	(1, 'email', 'noreply', 'noreply@domain.com'),
 	(2, 'name', 'noreply', 'Web App X'),
 	(3, 'footer', 'email', '<p>&nbsp;<p>\r\n<p>Best regards,</p>'),
-	(4, 'header', 'email', 'Dear {username},<br/><br/><br/>');
+	(4, 'header', 'email', 'Dear {username},<br/><br/><br/>'),
+	(5, 'facebook', 'socmed_url', 'https://www.facebook.com/webarq'),
+	(6, 'twitter', 'socmed_url', 'https://twitter.com/webarq'),
+	(7, 'youtube', 'socmed_url', 'http://www.youtube.com/webarq');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 
 -- Dumping data for table webarq-site.users: ~0 rows (approximately)
