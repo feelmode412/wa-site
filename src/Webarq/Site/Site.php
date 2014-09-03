@@ -28,6 +28,9 @@ class Site {
 				$route = str_plural($route);
 			}
 
+			// Replace slash (generated in Mac or Linux) with backslash
+			$controller = str_replace('/', '\\', $controller);
+
 			fwrite($handle, "\t'".$route."' => '".$controller."',\r\n");
 		}
 
