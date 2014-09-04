@@ -5,7 +5,14 @@ class Controller extends \Controller {
 	protected $ajaxResponse = array();
 	protected $layout = 'layouts.master';
 	
-	public function __construct() {}
+	public function __construct()
+	{
+		// Log out admin session, if any
+		if (Auth::check() && Auth::user()->admin()->count())
+		{
+			Auth::logout();
+		}
+	}
 
 	/**
 	 * Setup the layout used by the controller.
