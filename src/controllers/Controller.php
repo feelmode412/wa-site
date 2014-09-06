@@ -1,5 +1,7 @@
 <?php namespace Webarq\Site;
 
+use Auth;
+
 class Controller extends \Controller {
 	
 	protected $ajaxResponse = array();
