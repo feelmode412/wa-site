@@ -25,7 +25,9 @@ class SiteServiceProvider extends ServiceProvider {
  
 		\App::missing(function($exception)
 		{
-			return \Response::view('site::errors.missing', array(), 404);
+			$code = 404;
+			$message = 'Page not found.';
+			return \Response::view('site::error', compact('code', 'message'), $code);
 		});
 
 		\App::bind('site\form', function()
