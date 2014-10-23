@@ -1,9 +1,5 @@
 {
     "name": "webarq/site",
-    "dist": {
-        "url": "https://bitbucket.org/webarq/site.git",
-        "type": "git"
-    },
     "description": "",
     "authors": [
         {
