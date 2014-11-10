@@ -56,10 +56,7 @@ function handle_upload($inputName, $prefix, $row = null, $resizeWidth = null, $r
 			throw new Exception('Prefix length may not be more than 16.');
 		}
 
-		$fileName = (App::environment() === 'staging')
-			? 'default-'.$prefix.'-'.Str::random().'.'.$file->getClientOriginalExtension()
-			: $prefix.'-'.Str::random().'.'.$file->getClientOriginalExtension();
-		
+		$fileName = $prefix.'-'.Str::random().'.'.$file->getClientOriginalExtension();
 		if ($resizeWidth || $resizeHeight)
 		{
 			Image::make($file->getRealPath())
