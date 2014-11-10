@@ -52,7 +52,7 @@ class Site {
 	* @todo Multilanguage for the header and footer
 	*
 	*/
-	function sendEmail($templateCode, $receiver, $contentVars = array())
+	public function sendEmail($templateCode, $receiver, $contentVars = array())
 	{
 		$emailTemplate = Email\Template::whereCode($templateCode)->first();
 		$content = Setting::ofCodeType('header', 'email')->value
