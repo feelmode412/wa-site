@@ -1,8 +1,8 @@
 # WEBARQ Site
 
-A Laravel 4.0.* package which contains stuff regularly used in WEBARQ's web application projects.
+A Laravel 4 package contains stuff regularly used in WEBARQ's web application projects.
 
-See also: [WEBARQ\Presence](http://128.199.208.157/gitlist/index.php/webarq/presence.git).
+See also: [WEBARQ\Presence](#).
 
 ## Included Packages
 - Intervention/Image v1.5.0
@@ -17,13 +17,13 @@ See also: [WEBARQ\Presence](http://128.199.208.157/gitlist/index.php/webarq/pres
 		"repositories": [
 			{
 				"type": "vcs",
-				"url": "git@[server-name]:[path]/webarq/site.git"
+				"url": "git@[server-name]:webarq/site.git"
 			}
 		]
 3. Add the dependency:
 
 		"require": {
-			"webarq/site": "1.0.*"
+			"webarq/site": "1.2.x-dev"
 		}
 4. Change `preferred-install` to `auto`:
 
@@ -76,4 +76,4 @@ Then you can see the results in `/app/config/c_routes.php`.
 
  
 
-Copyright 2014 [Web Architect Technology](http://www.webarq.com/)
+&copy; 2014 [Web Architect Technology](http://www.webarq.com/)
