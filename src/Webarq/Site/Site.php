@@ -44,7 +44,18 @@ class Site {
 	{
 		foreach (\Config::get('c_routes') as $route => $controller)
 		{
-			\Route::controller($route, $controller);
+			$adminUrlPrefix = (\Config::get('admin::admin.urlPrefix')) ?: 'admin-cp';
+			if (substr($route, 0, strlen($adminUrlPrefix)) == $adminUrlPrefix)
+			{
+				\Route::group(array('before' => 'admin_auth'), function() use ($route, $controller)
+				{
+					\Route::controller($route, $controller);
+				});
+			}
+			else
+			{
+				\Route::controller($route, $controller);
+			}
 		}
 	}
 
