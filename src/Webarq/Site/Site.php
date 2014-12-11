@@ -1,5 +1,8 @@
 <?php namespace Webarq\Site;
 
+// Laravel's
+use Config, Mail, Route;
+
 class Site {
 
 	public function generateControllerRoutes()
@@ -11,7 +14,7 @@ class Site {
 		fwrite($handle, "return array(\r\n");
 
 		$_files = \File::allFiles(app_path().DIRECTORY_SEPARATOR.'controllers');
-		$adminUrlPrefix = (\Config::get('admin::admin.urlPrefix')) ?: 'admin-cp';
+		$adminUrlPrefix = (Config::get('admin::admin.urlPrefix')) ?: 'admin-cp';
 		foreach ($_files as $_file)
 		{
 			$file = str_replace(app_path().DIRECTORY_SEPARATOR.'controllers'.DIRECTORY_SEPARATOR, '', $_file);
@@ -42,19 +45,19 @@ class Site {
 
 	public function registerControllerRoutes()
 	{
-		foreach (\Config::get('c_routes') as $route => $controller)
+		foreach (Config::get('c_routes') as $route => $controller)
 		{
-			$adminUrlPrefix = (\Config::get('admin::admin.urlPrefix')) ?: 'admin-cp';
+			$adminUrlPrefix = (Config::get('admin::admin.urlPrefix')) ?: 'admin-cp';
 			if (substr($route, 0, strlen($adminUrlPrefix)) == $adminUrlPrefix)
 			{
-				\Route::group(array('before' => 'admin_auth'), function() use ($route, $controller)
+				Route::group(array('before' => 'admin_auth'), function() use ($route, $controller)
 				{
-					\Route::controller($route, $controller);
+					Route::controller($route, $controller);
 				});
 			}
 			else
 			{
-				\Route::controller($route, $controller);
+				Route::controller($route, $controller);
 			}
 		}
 	}
@@ -77,7 +80,7 @@ class Site {
 			$content = str_replace($var, $replacement, $content);
 		}
 
-		return \Mail::send('site::layouts.email.master', array('content' => $content), function($message) use ($emailTemplate, $receiver)
+		return Mail::send('site::layouts.email.master', array('content' => $content), function($message) use ($emailTemplate, $receiver)
 		{
 			$message->from(Setting::ofCodeType('email', 'noreply')->value, Setting::ofCodeType('name', 'noreply')->value);
 			$message->to($receiver->email, $receiver->username);
