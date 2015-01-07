@@ -11,6 +11,10 @@ class Controller extends \Controller {
 		// Log out admin session, if any
 		if (Auth::check() && Auth::user()->admin()->count())
 		{
+			\Session::put('siteMessage', array(
+				'content' => 'Please use another browser to view the website/frontend to continue working with this admin panel.',
+				'type' => 'warning',
+			));
 			Auth::logout();
 		}
 	}
