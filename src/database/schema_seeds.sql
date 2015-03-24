@@ -46,14 +46,14 @@ CREATE TABLE IF NOT EXISTS `settings` (
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(16) NOT NULL,
   `email` varchar(254) NOT NULL,
+  `first_name` varchar(16) NOT NULL,
+  `last_name` varchar(16) NOT NULL,
   `password` varchar(60) NOT NULL,
   `remember_token` varchar(60) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -77,13 +77,19 @@ CREATE TABLE IF NOT EXISTS `users` (
 /*!40000 ALTER TABLE `email_templates` DISABLE KEYS */;
 /*!40000 ALTER TABLE `email_templates` ENABLE KEYS */;
 
+-- Dumping data for table webarq-site.users: ~1 rows (approximately)
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`id`, `email`, `first_name`, `last_name`, `password`, `created_at`, `updated_at`) VALUES
+  (2, 'qosdil@webarq.com', 'Stewie', 'Griffin', '$2y$08$hb3/kWLXQ3JfR6dOUbrkk.Bm0Wy6sElIhYp89o0OgxoA3ORLObwSa', NULL, NULL);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
 -- Dumping data for table webarq-site.settings: ~4 rows (approximately)
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
 INSERT INTO `settings` (`id`, `code`, `type`, `value`) VALUES
 	(1, 'email', 'noreply', 'noreply@domain.com'),
 	(2, 'name', 'noreply', 'Web App X'),
 	(3, 'footer', 'email', '<p>&nbsp;<p>\r\n<p>Best regards,</p>'),
-	(4, 'header', 'email', 'Dear {username},<br/><br/><br/>'),
+	(4, 'header', 'email', 'Dear {email},<br/><br/><br/>'),
 	(5, 'facebook', 'socmed_url', 'https://www.facebook.com/webarq'),
 	(6, 'twitter', 'socmed_url', 'https://twitter.com/webarq'),
 	(7, 'youtube', 'socmed_url', 'http://www.youtube.com/webarq');
