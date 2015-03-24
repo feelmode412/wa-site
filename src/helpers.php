@@ -1,27 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Kohana-style translation
-|--------------------------------------------------------------------------
-|
-| See http://kohanaframework.org/3.3/guide/kohana/files/i18n
-| 
-|
-*/
-if ( ! function_exists('__'))
-{
-	function __($key, $options = array())
-	{
-		$t = (Config::get('i18n.'.App::getLocale().'.'.$key)) ?: $key;
-		foreach ($options as $key => $value)
-		{
-			$t = str_replace($key, $value, $t);
-		}
-		return $t;
-	}
-}
-
 if ( ! function_exists('append_current_url'))
 {
 	function append_current_url($options = array())
