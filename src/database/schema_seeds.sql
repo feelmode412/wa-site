@@ -92,7 +92,8 @@ INSERT INTO `settings` (`id`, `code`, `type`, `value`) VALUES
 	(4, 'header', 'email', 'Dear {email},<br/><br/><br/>'),
 	(5, 'facebook', 'socmed_url', 'https://www.facebook.com/webarq'),
 	(6, 'twitter', 'socmed_url', 'https://twitter.com/webarq'),
-	(7, 'youtube', 'socmed_url', 'http://www.youtube.com/webarq');
+	(7, 'youtube', 'socmed_url', 'http://www.youtube.com/webarq'),
+	(8, 'static_js', 'system', 'yes');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 
 -- Dumping data for table webarq-site.users: ~0 rows (approximately)

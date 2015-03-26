@@ -3,6 +3,9 @@
 // Laravel's
 use Config, Mail, Route;
 
+// Packages
+use MatthiasMullie\Minify;
+
 class Site {
 
 	public function generateControllerRoutes()
@@ -86,6 +89,41 @@ class Site {
 			$message->to($receiver->email, $receiver->email);
 			$message->subject($emailTemplate->title);
 		});
+	}
+
+	/**
+	* generateJs()
+	*
+	* @todo $minifiedJs option (true or false)
+	*/
+	public function generateJs()
+	{
+		$setting = Setting::ofCodeType('static_js', 'system')->value;
+		$staticJs = (strtolower($setting) === 'yes') ? true : false;
+		$output = '';
+		if ($staticJs)
+		{
+			foreach (Config::get('site::js_files') as $file)
+			{
+				$output .= '<script type="text/javascript" src="'.asset('js/'.$file.'.js').'"></script>'."\r\n";
+			}
+		}
+		else
+		{
+			$output .= '<script type="text/javascript">';
+			$minifier = new Minify\Js();
+			foreach (Config::get('site::js_files') as $file)
+			{
+				$file = public_path('js/'.$file.'.js');
+				if (file_exists($file))
+					$minifier->add($file);
+			}
+
+			$output .= $minifier->minify();
+			$output .= '</script>';
+		}
+
+		return $output;
 	}
 	
 }
