@@ -1,15 +1,5 @@
 <?php
 
-if ( ! function_exists('append_current_url'))
-{
-	function append_current_url($options = array())
-	{
-		parse_str($_SERVER['QUERY_STRING'], $parsedStr);
-		$queryStrings = array_merge($parsedStr, $options);
-
-		return \URL::current().'?'.http_build_query($queryStrings);
-	}
-}
 if ( ! function_exists('currency_format'))
 {
 	function currency_format($number, $currency = 'IDR')

@@ -8,6 +8,14 @@ use MatthiasMullie\Minify;
 
 class Site {
 
+	public function appendCurrentUrl($options = array())
+	{
+		parse_str($_SERVER['QUERY_STRING'], $parsedStr);
+		$queryStrings = array_merge($parsedStr, $options);
+
+		return \URL::current().'?'.http_build_query($queryStrings);
+	}
+
 	public function generateControllerRoutes()
 	{
 		$cRouteFile = app_path().DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'c_routes.php';
