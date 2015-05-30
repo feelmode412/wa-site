@@ -16,6 +16,11 @@ class Site {
 		return \URL::current().'?'.http_build_query($queryStrings);
 	}
 
+	public function currencyFormat($number, $currency = 'IDR')
+	{
+		return $currency.' '.number_format($number, 2, '.', ',');
+	}
+
 	public function generateControllerRoutes()
 	{
 		$cRouteFile = app_path().DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'c_routes.php';

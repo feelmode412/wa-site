@@ -1,13 +1,5 @@
 <?php
 
-if ( ! function_exists('currency_format'))
-{
-	function currency_format($number, $currency = 'IDR')
-	{
-		return $currency.' '.number_format($number, 2, '.', ',');
-	}
-}
-
 if ( ! function_exists('dd2'))
 {
 	function dd2($var)
