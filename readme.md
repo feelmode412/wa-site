@@ -2,7 +2,7 @@
 
 A Laravel 4 package contains stuff regularly used in WEBARQ's web application projects.
 
-See also: [WEBARQ\Presence](#).
+See also: WEBARQ\Presence.
 
 ## Included Packages
 - Intervention/Image v1.5.0
@@ -23,7 +23,7 @@ See also: [WEBARQ\Presence](#).
 3. Add the dependency:
 
 		"require": {
-			"webarq/site": "1.2.x-dev"
+			"webarq/site": "1.3.x-dev"
 		}
 4. Change `preferred-install` to `auto`:
 
@@ -32,7 +32,7 @@ See also: [WEBARQ\Presence](#).
 		},
 5. Update Composer:
 
-		"composer update"
+		"composer update webarq/site -vv"
 6. Update your `/app/config/app.php`:
 		
 		'providers' => array(
@@ -45,14 +45,10 @@ See also: [WEBARQ\Presence](#).
 			'Site' => 'Webarq\Site\SiteFacade',
 		);
 
-### Merge Schema
+### Run Migrations
 
-Merge `/src/database/schema_seeds.sql` to your MySQL database. It contains 2 tables:
-
-- email_templates
-- settings
-- users 
-
+	php artisan migrate --package="webarq/site"
+		
 ### Register The Controller Route Generator
 
 In your `/app/routes.php`, add the following line on top of others:
