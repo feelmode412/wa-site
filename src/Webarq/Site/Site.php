@@ -21,6 +21,23 @@ class Site {
 		return $currency.' '.number_format($number, 2, '.', ',');
 	}
 
+
+	/**
+	* lang()
+	* Locale helper for database content
+	* For example: returns the field "title_locale_id" when the locale session
+	* is "id"
+	*
+	*/
+	public function lang($row, $fieldName)
+	{
+		$locale = \App::getLocale();
+
+		return ($locale === 'en')
+			? $row->{$fieldName}
+			: ($row->{$fieldName.'_locale_'.$locale}) ?: $row->{$fieldName};
+	}
+
 	public function generateControllerRoutes()
 	{
 		$cRouteFile = app_path().DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'c_routes.php';

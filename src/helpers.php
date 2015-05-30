@@ -43,28 +43,6 @@ if ( ! function_exists('handle_upload'))
 	}
 }
 
-
-/*
-|--------------------------------------------------------------------------
-| Locale Helper for Database Content
-|--------------------------------------------------------------------------
-|
-| For example: returns the field "title_locale_id" when the locale session
-| is "id"
-|
-*/
-if ( ! function_exists('lang'))
-{
-	function lang($row, $fieldName)
-	{
-		$locale = App::getLocale();
-
-		return ($locale === 'en')
-			? $row->{$fieldName}
-			: ($row->{$fieldName.'_locale_'.$locale}) ?: $row->{$fieldName};
-	}
-}
-
 if ( ! function_exists('list_lang'))
 {
 	function list_lang($fieldName)
