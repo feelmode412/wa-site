@@ -25,7 +25,7 @@ class CreateSettingsTable extends Migration {
 		DB::table('settings')->insert([
 			['code' => 'email', 'type' => 'noreply', 'value' => 'noreply@domain.com'],
 			['code' => 'name', 'type' => 'noreply', 'value' => 'Web App X'],
-			['code' => 'footer', 'type' => 'email', 'value' => '<p>&nbsp;<p>\r\n<p>Best regards,</p>'],
+			['code' => 'footer', 'type' => 'email', 'value' => "<p>&nbsp;<p>\r\n<p>Best regards,</p>"],
 			['code' => 'header', 'type' => 'email', 'value' => 'Dear {email},<br/><br/><br/>'],
 			['code' => 'facebook', 'type' => 'socmed_url', 'value' => 'https://www.facebook.com/webarq'],
 			['code' => 'twitter', 'type' => 'socmed_url', 'value' => 'https://twitter.com/webarq'],
