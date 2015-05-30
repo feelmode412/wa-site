@@ -34,7 +34,7 @@ class SiteServiceProvider extends ServiceProvider {
 		{
 			return new \Webarq\Site\Form();
 		});
-		include __DIR__.'/../../helpers.php';
+		
 		include __DIR__.'/../../routes.php';
 	}
 
