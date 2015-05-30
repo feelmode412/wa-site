@@ -69,7 +69,6 @@ After creating controllers, generate their routes by hitting the generator URL l
 	http://domain.com/index.php/generate-c-routes
 
 Then you can see the results in `/app/config/c_routes.php`.
-
  
-
-&copy; 2014 [Web Architect Technology](http://www.webarq.com/)
+***
+&copy; 2014 - 2015 [Web Architect Technology, PT](http://www.webarq.com/)
