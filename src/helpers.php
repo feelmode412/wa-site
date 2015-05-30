@@ -1,21 +1,5 @@
 <?php
 
-if ( ! function_exists('dd2'))
-{
-	function dd2($var)
-	{
-		if (in_array(gettype($var), array('boolean', 'NULL')))
-			var_dump($var);
-		else
-		{
-			echo '<pre>';
-			print_r($var);
-		}
-
-		die;
-	}
-}
-
 if ( ! function_exists('handle_upload'))
 {
 	function handle_upload($inputName, $prefix, $row = null, $resizeWidth = null, $resizeHeight = null, $ratio = true)
