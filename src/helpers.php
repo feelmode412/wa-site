@@ -42,15 +42,3 @@ if ( ! function_exists('handle_upload'))
 		}
 	}
 }
-
-if ( ! function_exists('list_lang'))
-{
-	function list_lang($fieldName)
-	{
-		$locale = App::getLocale();
-
-		return ($locale === 'en')
-			? $fieldName
-			: $fieldName.'_locale_'.$locale;
-	}	
-}

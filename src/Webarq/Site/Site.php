@@ -38,6 +38,12 @@ class Site {
 			: ($row->{$fieldName.'_locale_'.$locale}) ?: $row->{$fieldName};
 	}
 
+	public function listLang($fieldName)
+	{
+		$locale = \App::getLocale();
+		return ($locale === 'en') ? $fieldName : $fieldName.'_locale_'.$locale;
+	}
+
 	public function generateControllerRoutes()
 	{
 		$cRouteFile = app_path().DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'c_routes.php';
