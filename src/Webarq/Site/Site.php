@@ -165,26 +165,14 @@ class Site {
 		});
 	}
 
-	/**
-	* generateJs()
-	*
-	* @todo $minifiedJs option (true or false)
-	*/
 	public function generateJs()
 	{
-		$setting = Setting::ofCodeType('static_js', 'system')->value;
-		$staticJs = (strtolower($setting) === 'yes') ? true : false;
+		$setting = Setting::ofCodeType('minify_js', 'system')->value;
+		$minifyJs = (strtolower($setting) === 'yes') ? true : false;
 		$output = '';
-		if ($staticJs)
+		if ($minifyJs)
 		{
-			foreach (Config::get('site::js_files') as $file)
-			{
-				$output .= '<script type="text/javascript" src="'.asset('js/'.$file.'.js').'"></script>'."\r\n";
-			}
-		}
-		else
-		{
-			$output .= '<script type="text/javascript">';
+			$output .= '<script type="text/javascript">'."\r\n";
 			$minifier = new Minify\Js();
 			foreach (Config::get('site::js_files') as $file)
 			{
@@ -194,7 +182,14 @@ class Site {
 			}
 
 			$output .= $minifier->minify();
-			$output .= '</script>';
+			$output .= "\r\n</script>";
+		}
+		else
+		{
+			foreach (Config::get('site::js_files') as $file)
+			{
+				$output .= '<script type="text/javascript" src="'.asset('js/'.$file.'.js').'"></script>'."\r\n";
+			}
 		}
 
 		return $output;
