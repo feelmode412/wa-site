@@ -84,6 +84,9 @@ class Site {
 
 	public function registerControllerRoutes()
 	{
+		if (\App::runningInConsole())
+			return;
+
 		foreach (Config::get('c_routes') as $route => $controller)
 		{
 			$adminUrlPrefix = (Config::get('admin::admin.urlPrefix')) ?: 'admin-cp';
