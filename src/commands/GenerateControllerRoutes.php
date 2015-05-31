@@ -18,7 +18,7 @@ class GenerateControllerRoutes extends Command {
 	 *
 	 * @var string
 	 */
-	protected $description = 'Generate controller routes.';
+	protected $description = 'Generate controller routes. If an error occurs, delete /app/config/c_routes.php, then run me again.';
 
 	/**
 	 * Create a new command instance.
