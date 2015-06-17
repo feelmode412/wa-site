@@ -16,11 +16,6 @@ class Site {
 		return \URL::current().'?'.http_build_query($queryStrings);
 	}
 
-	public function currencyFormat($number, $currency = 'IDR')
-	{
-		return $currency.' '.number_format($number, 2, '.', ',');
-	}
-
 	public function handleUpload($inputName, $prefix, $row = null, $resizeWidth = null, $resizeHeight = null, $ratio = true)
 	{
 		if (\Input::hasFile($inputName))
@@ -82,28 +77,6 @@ class Site {
 		return ($locale === 'en') ? $fieldName : $fieldName.'_locale_'.$locale;
 	}
 
-	public function registerControllerRoutes()
-	{
-		if (\App::runningInConsole())
-			return;
-
-		foreach (Config::get('c_routes') as $route => $controller)
-		{
-			$adminUrlPrefix = (Config::get('admin::admin.urlPrefix')) ?: 'admin-cp';
-			if (substr($route, 0, strlen($adminUrlPrefix)) == $adminUrlPrefix)
-			{
-				Route::group(array('before' => 'admin_auth'), function() use ($route, $controller)
-				{
-					Route::controller($route, $controller);
-				});
-			}
-			else
-			{
-				Route::controller($route, $controller);
-			}
-		}
-	}
-
 	/**
 	* @todo Multilanguage for the header and footer
 	*
@@ -128,36 +101,6 @@ class Site {
 			$message->to($receiver->email, $receiver->email);
 			$message->subject($emailTemplate->title);
 		});
-	}
-
-	public function generateJs()
-	{
-		$setting = Setting::ofCodeType('minify_js', 'system')->value;
-		$minifyJs = (strtolower($setting) === 'yes') ? true : false;
-		$output = '';
-		if ($minifyJs)
-		{
-			$output .= '<script type="text/javascript">'."\r\n";
-			$minifier = new Minify\Js();
-			foreach (Config::get('site::js_files') as $file)
-			{
-				$file = public_path('js/'.$file.'.js');
-				if (file_exists($file))
-					$minifier->add($file);
-			}
-
-			$output .= $minifier->minify();
-			$output .= "\r\n</script>";
-		}
-		else
-		{
-			foreach (Config::get('site::js_files') as $file)
-			{
-				$output .= '<script type="text/javascript" src="'.asset('js/'.$file.'.js').'"></script>'."\r\n";
-			}
-		}
-
-		return $output;
 	}
 	
 }

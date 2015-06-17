@@ -47,13 +47,6 @@ class SiteServiceProvider extends ServiceProvider {
 		{
 			return new Site;
 		});
-
-		$this->app['site:generate-c-routes'] = $this->app->share(function($app)
-		{
-			return new GenerateControllerRoutes();
-		});
-
-		$this->commands('site:generate-c-routes');
 	}
 
 	/**
