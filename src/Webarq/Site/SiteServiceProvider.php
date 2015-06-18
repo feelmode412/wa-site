@@ -29,11 +29,6 @@ class SiteServiceProvider extends ServiceProvider {
 			$message = 'Page not found.';
 			return \Response::view('site::error', compact('code', 'message'), $code);
 		});
-
-		\App::bind('site\form', function()
-		{
-			return new \Webarq\Site\Form();
-		});
 	}
 
 	/**

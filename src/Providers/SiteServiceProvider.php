@@ -2,6 +2,7 @@
 
 namespace Webarq\Site\Providers;
 
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
 class SiteServiceProvider extends ServiceProvider
@@ -12,8 +13,13 @@ class SiteServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {
-        //
+    {   
+        $this->app->singleton('site\form', function ($app) {
+            return new \Webarq\Site\Form();
+        });
+
+        $loader = AliasLoader::getInstance();
+        $loader->alias('Site\Form', 'Webarq\Site\Support\Facades\Form');
     }
 
     /**
