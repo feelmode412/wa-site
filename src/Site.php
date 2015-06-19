@@ -21,13 +21,16 @@ class Site {
 		if (\Input::hasFile($inputName))
 		{
 			$path = public_path('contents').'/';
+			if ( ! file_exists($path))
+				throw new \Exception('/public/contents/ directory does not exists or is not writable.');
+
 			$file = \Input::file($inputName);
 			if (strlen($prefix) > 16)
 			{
 				throw new \Exception('Prefix length may not be more than 16.');
 			}
 
-			$fileName = $prefix.'-'.\Str::random().'.'.$file->getClientOriginalExtension();
+			$fileName = $prefix.'-'.str_random().'.'.$file->getClientOriginalExtension();
 			if ($resizeWidth || $resizeHeight)
 			{
 				\Image::make($file->getRealPath())->resize($resizeWidth, $resizeHeight, $ratio)->save($path.$fileName);
