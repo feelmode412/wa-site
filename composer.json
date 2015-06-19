@@ -8,6 +8,7 @@
         }
     ],
     "require": {
+        "illuminate/support": "5.1.*",
         "intervention/image": "2.2.*"
     },
     "autoload": {
