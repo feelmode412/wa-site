@@ -12,7 +12,7 @@ class CreateSettingsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('settings', function($table)
+		Schema::create('settings', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('code', 30);
@@ -30,7 +30,6 @@ class CreateSettingsTable extends Migration {
 			['code' => 'facebook', 'type' => 'socmed_url', 'value' => 'https://www.facebook.com/webarq'],
 			['code' => 'twitter', 'type' => 'socmed_url', 'value' => 'https://twitter.com/webarq'],
 			['code' => 'youtube', 'type' => 'socmed_url', 'value' => 'http://www.youtube.com/webarq'],
-			['code' => 'static_js', 'type' => 'system', 'value' => 'yes']
 		]);
 	}
 

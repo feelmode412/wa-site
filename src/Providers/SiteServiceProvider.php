@@ -13,7 +13,11 @@ class SiteServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {   
+    {
+        $this->publishes([
+            __DIR__.'/../database/migrations/' => database_path('/migrations')
+        ], 'migrations');
+
         $this->app->singleton('site\form', function ($app) {
             return new \Webarq\Site\Form();
         });
