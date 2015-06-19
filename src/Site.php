@@ -4,6 +4,7 @@
 use Config, Mail, Route;
 
 // Packages
+use Intervention\Image\ImageManager;
 use MatthiasMullie\Minify;
 
 class Site {
@@ -16,7 +17,7 @@ class Site {
 		return \URL::current().'?'.http_build_query($queryStrings);
 	}
 
-	public function handleUpload($inputName, $prefix, $row = null, $resizeWidth = null, $resizeHeight = null, $ratio = true)
+	public function handleUpload($inputName, $prefix, $row = null, $resizeWidth = null, $resizeHeight = null, \Closure $callback = null)
 	{
 		if (\Input::hasFile($inputName))
 		{
@@ -33,7 +34,8 @@ class Site {
 			$fileName = $prefix.'-'.str_random().'.'.$file->getClientOriginalExtension();
 			if ($resizeWidth || $resizeHeight)
 			{
-				\Image::make($file->getRealPath())->resize($resizeWidth, $resizeHeight, $ratio)->save($path.$fileName);
+				$imageManager = new ImageManager();
+				$imageManager->make($file->getRealPath())->resize($resizeWidth, $resizeHeight, $callback)->save($path.$fileName);
 			}
 			else
 			{
