@@ -12,7 +12,7 @@ class CreateEmailTemplatesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('email_templates', function($table)
+		Schema::create('email_templates', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('code', 50)->unique();
