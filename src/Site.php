@@ -22,9 +22,6 @@ class Site {
 		if (\Input::hasFile($inputName))
 		{
 			$path = public_path('contents').'/';
-			if ( ! file_exists($path))
-				throw new \Exception('/public/contents/ directory does not exists or is not writable.');
-
 			$file = \Input::file($inputName);
 			if (strlen($prefix) > 16)
 			{
