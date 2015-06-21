@@ -5,7 +5,6 @@ use Config, Mail, Route;
 
 // Packages
 use Intervention\Image\ImageManager;
-use MatthiasMullie\Minify;
 
 class Site {
 
