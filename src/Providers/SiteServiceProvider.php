@@ -24,6 +24,8 @@ class SiteServiceProvider extends ServiceProvider
 
         $loader = AliasLoader::getInstance();
         $loader->alias('Site\Form', 'Webarq\Site\Support\Facades\Form');
+
+        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'site');
     }
 
     /**
