@@ -8,6 +8,6 @@ class Form extends Facade
 {
     protected static function getFacadeAccessor()
     {
-    	return 'site\form';
+        return 'site\form';
     }
 }

@@ -2,13 +2,14 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Setting extends Model {
-	
-	public $timestamps = false;
-	
-	public function scopeOfCodeType($query, $code, $type)
-	{
-		return $query->whereCode($code)->whereType($type)->first();
-	}
+class Setting extends Model
+{
+
+    public $timestamps = false;
+
+    public function scopeOfCodeType($query, $code, $type)
+    {
+        return $query->whereCode($code)->whereType($type)->first();
+    }
 
 }

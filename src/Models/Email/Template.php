@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Template extends Model {
-	protected $table = 'email_templates';
+class Template extends Model
+{
+    protected $table = 'email_templates';
 }

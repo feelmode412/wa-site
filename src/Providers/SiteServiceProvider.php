@@ -35,8 +35,7 @@ class SiteServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app['site'] = $this->app->share(function($app)
-        {
+        $this->app['site'] = $this->app->share(function ($app) {
             return new \Webarq\Site\Site();
         });
     }

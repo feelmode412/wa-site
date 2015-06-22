@@ -8,6 +8,6 @@ class Site extends Facade
 {
     protected static function getFacadeAccessor()
     {
-    	return 'site';
+        return 'site';
     }
 }
