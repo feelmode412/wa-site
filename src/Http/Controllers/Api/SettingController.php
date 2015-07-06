@@ -16,11 +16,6 @@ class SettingController extends Controller
         $this->settings = $settings;
     }
 
-    public function index2()
-    {
-        return $this->settings->all();
-    }
-
     /**
      * Display a listing of the resource.
      *
