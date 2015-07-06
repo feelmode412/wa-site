@@ -23,8 +23,19 @@ class SettingController extends Controller
      */
     public function index()
     {
-        $settings = $this->settings->all();
-        return $this->response->withCollection($settings, new SettingTransformer);
+        $settings = $this->settings;
+
+        // Pagination: offset
+        if (\Input::get('offset')) {
+            $settings = $settings->skip(\Input::get('offset'));
+        }
+
+        // Pagination: limit
+        if (\Input::get('limit')) {
+            $settings = $settings->take(\Input::get('limit'));
+        }
+
+        return $this->response->withCollection($settings->get(), new SettingTransformer);
     }
 
     /**
