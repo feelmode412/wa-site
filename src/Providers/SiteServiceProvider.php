@@ -26,6 +26,8 @@ class SiteServiceProvider extends ServiceProvider
         $loader->alias('Site\Form', 'Webarq\Site\Support\Facades\Form');
 
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'site');
+
+        require __DIR__.'/../Http/routes.php';
     }
 
     /**
