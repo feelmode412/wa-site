@@ -34,6 +34,32 @@ class SettingController extends Controller
             }
         }
 
+        // Sorting
+        if (\Input::get('sort')) {
+
+            // Extract from "+field1,+field2,-field3"
+            $sortFields = explode(',', \Input::get('sort'));
+
+            foreach ($sortFields as $sortField) {
+
+                // Get "+", "-"
+                $sign = substr($sortField, 0, 1);
+
+                // Get the field name
+                $field = substr($sortField, 1);
+
+                // Validate sort sign (plus or minus sign), a blank space means plus
+                if ( ! in_array($sign, [' ', '+', '-']))
+                    continue;
+
+                // Prepare the sort type
+                $sortType = ($sign === ' ' || $sign === '+') ? 'asc' : 'desc';
+
+                // Do the sort
+                $settings = $settings->orderBy($field, $sortType);
+            }
+        }
+
         // Pagination: offset
         if (\Input::get('offset')) {
             $settings = $settings->skip(\Input::get('offset'));
