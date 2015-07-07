@@ -10,6 +10,8 @@ use Webarq\Site\Transformers\SettingTransformer;
 
 class SettingController extends Controller
 {
+    protected $searchableFields = ['code', 'type', 'value'];
+
     public function __construct(Response $response, Setting $settings)
     {
         $this->response = $response;
@@ -24,6 +26,13 @@ class SettingController extends Controller
     public function index()
     {
         $settings = $this->settings;
+
+        // Search
+        foreach ($this->searchableFields as $field) {
+            if (\Input::get($field)) {
+                $settings = $settings->where($field, \Input::get($field));
+            }
+        }
 
         // Pagination: offset
         if (\Input::get('offset')) {
