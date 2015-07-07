@@ -2,90 +2,38 @@
 
 namespace Webarq\Site\Http\Controllers\Api;
 
-use EllipseSynergie\ApiResponse\Laravel\Response;
-use Illuminate\Http\Request;
 use Webarq\Site\Http\Controllers\Controller;
 use Webarq\Site\Models\Setting;
+use Webarq\Site\ResourceHandler;
+use Webarq\Site\Response;
 use Webarq\Site\Transformers\SettingTransformer;
 
 class SettingController extends Controller
 {
-    protected $perPage = 10;
-    protected $searchableFields = ['code', 'type', 'value'];
-
-    public function __construct(Response $response, Setting $settings)
+    public function __construct(ResourceHandler $resource, Response $response, Setting $model)
     {
+        // Resource model
+        $resource->resource = $model;
+
+        // Resource
+        $this->resource = $resource;
+
+        // Response
         $this->response = $response;
-        $this->settings = $settings;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
     public function index()
     {
-        $settings = $this->settings;
+        // Init Resource
+        $resource = $this->resource;
+        $resource->searchableFields = ['code', 'type', 'value'];
 
-        // Search
-        foreach ($this->searchableFields as $field) {
-            if (\Input::get($field)) {
-                $settings = $settings->where($field, \Input::get($field));
-            }
-        }
+        // Init Response
+        $response = $this->response;
+        $response->resource = $resource;
+        $response->transformer = new SettingTransformer();
 
-        if ($settings->count() === 0) {
-            return $this->response->errorNotFound();
-        }
-
-        // Sorting
-        if (\Input::get('sort')) {
-
-            // Extract from "+field1,+field2,-field3"
-            $sortFields = explode(',', \Input::get('sort'));
-
-            foreach ($sortFields as $sortField) {
-
-                // Get "+", "-"
-                $sign = substr($sortField, 0, 1);
-
-                // Get the field name
-                $field = substr($sortField, 1);
-
-                // Validate sort sign (plus or minus sign), a blank space means plus
-                if ( ! in_array($sign, [' ', '+', '-']))
-                    continue;
-
-                // Prepare the sort type
-                $sortType = ($sign === ' ' || $sign === '+') ? 'asc' : 'desc';
-
-                // Do the sort
-                $settings = $settings->orderBy($field, $sortType);
-            }
-        }
-
-        // Client overrides our pagination by using "offset" and/or "limit"
-        if ( ! \Input::get('page')) {
-
-            // Offset
-            if (\Input::get('offset')) {
-                $settings = $settings->skip(\Input::get('offset'));
-            }
-
-            // Limit
-            if (\Input::get('limit')) {
-                $settings = $settings->take(\Input::get('limit'));
-            }
-        }
-
-        $transformer = new SettingTransformer();
-        if (\Input::get('offset') || \Input::get('limit')) {
-            return $this->response->withCollection($settings->get(), $transformer);
-        } else {
-            $settings = $settings->paginate($this->perPage);
-            return $this->response->withPaginator($settings, $transformer);
-        }
+        return $response->index();
     }
 
     /**
