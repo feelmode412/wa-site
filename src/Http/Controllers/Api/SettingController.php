@@ -10,6 +10,7 @@ use Webarq\Site\Transformers\SettingTransformer;
 
 class SettingController extends Controller
 {
+    protected $perPage = 10;
     protected $searchableFields = ['code', 'type', 'value'];
 
     public function __construct(Response $response, Setting $settings)
@@ -60,17 +61,27 @@ class SettingController extends Controller
             }
         }
 
-        // Pagination: offset
-        if (\Input::get('offset')) {
-            $settings = $settings->skip(\Input::get('offset'));
+        // Client overrides our pagination by using "offset" and/or "limit"
+        if ( ! \Input::get('page')) {
+
+            // Offset
+            if (\Input::get('offset')) {
+                $settings = $settings->skip(\Input::get('offset'));
+            }
+
+            // Limit
+            if (\Input::get('limit')) {
+                $settings = $settings->take(\Input::get('limit'));
+            }
         }
 
-        // Pagination: limit
-        if (\Input::get('limit')) {
-            $settings = $settings->take(\Input::get('limit'));
+        $transformer = new SettingTransformer();
+        if (\Input::get('offset') || \Input::get('limit')) {
+            return $this->response->withCollection($settings->get(), $transformer);
+        } else {
+            $settings = $settings->paginate($this->perPage);
+            return $this->response->withPaginator($settings, $transformer);
         }
-
-        return $this->response->withCollection($settings->get(), new SettingTransformer);
     }
 
     /**
