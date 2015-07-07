@@ -35,6 +35,10 @@ class SettingController extends Controller
             }
         }
 
+        if ($settings->count() === 0) {
+            return $this->response->errorNotFound();
+        }
+
         // Sorting
         if (\Input::get('sort')) {
 
