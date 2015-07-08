@@ -4,15 +4,10 @@ namespace Webarq\Site\Api;
 
 use EllipseSynergie\ApiResponse\Laravel\Response as EllipseSynergieResponse;
 
-class Response
+class Response extends EllipseSynergieResponse
 {
     public $resource;
     public $transformer;
-
-    public function __construct(EllipseSynergieResponse $response)
-    {
-        $this->response = $response;
-    }
 
     public function index()
     {
@@ -23,7 +18,7 @@ class Response
 
         // 404
         if ($resource->resource->count() == 0)
-            return $this->response->errorNotFound();
+            return $this->errorNotFound();
 
         // Sorting
         $resource->sorting();
@@ -33,10 +28,10 @@ class Response
 
         $resourceModel = $resource->resource;
         if (\Input::get('offset') || \Input::get('limit')) {
-            return $this->response->withCollection($resourceModel->get(), $this->transformer);
+            return $this->withCollection($resourceModel->get(), $this->transformer);
         } else {
             $resourceModel = $resourceModel->paginate($resource->perPage);
-            return $this->response->withPaginator($resourceModel, $this->transformer);
+            return $this->withPaginator($resourceModel, $this->transformer);
         }
     }
 
@@ -46,8 +41,8 @@ class Response
 
         // 404
         if ( ! $item)
-            return $this->response->errorNotFound();
+            return $this->errorNotFound();
 
-        return $this->response->withItem($item, $this->transformer);
+        return $this->withItem($item, $this->transformer);
     }
 }
