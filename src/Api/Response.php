@@ -40,6 +40,11 @@ class Response extends EllipseSynergieResponse
         $this->resource = $resource;
     }
 
+    public function setTransformer($transformer)
+    {
+        $this->transformer = $transformer;
+    }
+
     public function show($id)
     {
         $item = $this->resource->resource->find($id);

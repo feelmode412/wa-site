@@ -22,7 +22,7 @@ class SettingController extends Controller
         $this->resource = $resource;
 
         // Provide transformer
-        $response->transformer = new SettingTransformer();
+        $response->setTransformer(new SettingTransformer());
 
         // Provide response
         $this->response = $response;
