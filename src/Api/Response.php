@@ -1,6 +1,6 @@
 <?php
 
-namespace Webarq\Site;
+namespace Webarq\Site\Api;
 
 use EllipseSynergie\ApiResponse\Laravel\Response as EllipseSynergieResponse;
 
