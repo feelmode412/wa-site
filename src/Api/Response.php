@@ -14,12 +14,6 @@ class Response
         $this->response = $response;
     }
 
-    public function handleNotFound()
-    {
-        if ($this->resource->resource->count() === 0)
-            return $this->response->errorNotFound();
-    }
-
     public function index()
     {
         $resource = $this->resource;
@@ -28,7 +22,8 @@ class Response
         $resource->searching();
 
         // 404
-        $this->handleNotFound();
+        if ($resource->resource->count() == 0)
+            return $this->response->errorNotFound();
 
         // Sorting
         $resource->sorting();
@@ -48,6 +43,11 @@ class Response
     public function show($id)
     {
         $item = $this->resource->resource->find($id);
+
+        // 404
+        if ( ! $item)
+            return $this->response->errorNotFound();
+
         return $this->response->withItem($item, $this->transformer);
     }
 }
