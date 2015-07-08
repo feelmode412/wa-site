@@ -22,8 +22,13 @@ class SiteServiceProvider extends ServiceProvider
             return new \Webarq\Site\Form();
         });
 
+        $this->app->singleton('site\resourcehandler', function($app) {
+            return new \Webarq\Site\ResourceHandler();
+        });
+
         $loader = AliasLoader::getInstance();
         $loader->alias('Site\Form', 'Webarq\Site\Support\Facades\Form');
+        $loader->alias('Site\ResourceHandler', 'Webarq\Site\Support\Facades\ResourceHandler');
 
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'site');
 
