@@ -26,6 +26,11 @@ class ResourceHandler
             $this->resource = $this->resource->take(\Input::get('limit'));
     }
 
+    public function getPerPage()
+    {
+        return $this->perPage;
+    }
+
     public function getResource()
     {
         return $this->resource;
@@ -47,7 +52,7 @@ class ResourceHandler
 
     public function setSearchableFields($searchableFields = [])
     {
-        $this->setSearchableFields = $searchableFields;
+        $this->searchableFields = $searchableFields;
     }
 
     public function sorting()

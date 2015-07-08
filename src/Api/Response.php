@@ -27,7 +27,7 @@ class Response extends EllipseSynergieResponse
         if (\Input::get('offset') || \Input::get('limit')) {
             return $this->withCollection($resource->get(), $this->transformer);
         } else {
-            $resource = $resource->paginate($resource->perPage);
+            $resource = $resource->paginate(\Site\ResourceHandler::getPerPage());
             return $this->withPaginator($resource, $this->transformer);
         }
     }
