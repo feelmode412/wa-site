@@ -10,16 +10,12 @@ use Webarq\Site\Transformers\SettingTransformer;
 
 class SettingController extends Controller
 {
-    public function __construct(ResourceHandler $resource, Response $response, Setting $settings)
+    public function __construct(Response $response, Setting $settings)
     {
-        $this->resource = $resource;
         $this->response = $response;
 
         // Set the resource from model
-        $this->resource->resource = $settings;
-
-        // Provide resource to response
-        $this->response->setResource($resource);
+        \Site\ResourceHandler::setResource($settings);
 
         // Provide transformer
         $this->response->setTransformer(new SettingTransformer());
@@ -27,7 +23,7 @@ class SettingController extends Controller
 
     public function index()
     {
-        $this->resource->searchableFields = ['code', 'type', 'value'];
+        \Site\ResourceHandler::setSearchableFields(['code', 'type', 'value']);
         return $this->response->index();
     }
 

@@ -6,38 +6,30 @@ use EllipseSynergie\ApiResponse\Laravel\Response as EllipseSynergieResponse;
 
 class Response extends EllipseSynergieResponse
 {
-    public $resource;
     public $transformer;
 
     public function index()
     {
-        $resource = $this->resource;
-
         // Search
-        $resource->searching();
+        \Site\ResourceHandler::searching();
 
         // 404
-        if ($resource->resource->count() == 0)
+        if (\Site\ResourceHandler::getResource()->count() == 0)
             return $this->errorNotFound();
 
         // Sorting
-        $resource->sorting();
+        \Site\ResourceHandler::sorting();
 
         // Custom pagination
-        $resource->customPagination();
+        \Site\ResourceHandler::customPagination();
 
-        $resourceModel = $resource->resource;
+        $resource = \Site\ResourceHandler::getResource();
         if (\Input::get('offset') || \Input::get('limit')) {
-            return $this->withCollection($resourceModel->get(), $this->transformer);
+            return $this->withCollection($resource->get(), $this->transformer);
         } else {
-            $resourceModel = $resourceModel->paginate($resource->perPage);
-            return $this->withPaginator($resourceModel, $this->transformer);
+            $resource = $resource->paginate($resource->perPage);
+            return $this->withPaginator($resource, $this->transformer);
         }
-    }
-
-    public function setResource($resource)
-    {
-        $this->resource = $resource;
     }
 
     public function setTransformer($transformer)
@@ -47,7 +39,7 @@ class Response extends EllipseSynergieResponse
 
     public function show($id)
     {
-        $item = $this->resource->resource->find($id);
+        $item = \Site\ResourceHandler::getResource()->find($id);
 
         // 404
         if ( ! $item)

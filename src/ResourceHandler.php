@@ -26,6 +26,11 @@ class ResourceHandler
             $this->resource = $this->resource->take(\Input::get('limit'));
     }
 
+    public function getResource()
+    {
+        return $this->resource;
+    }
+
     public function searching()
     {
         foreach ($this->searchableFields as $field) {
@@ -33,6 +38,16 @@ class ResourceHandler
                 $this->resource = $this->resource->where($field, \Input::get($field));
             }
         }
+    }
+
+    public function setResource($resource)
+    {
+        $this->resource = $resource;
+    }
+
+    public function setSearchableFields($searchableFields = [])
+    {
+        $this->setSearchableFields = $searchableFields;
     }
 
     public function sorting()
