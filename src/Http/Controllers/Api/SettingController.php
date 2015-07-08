@@ -4,7 +4,6 @@ namespace Webarq\Site\Http\Controllers\Api;
 
 use Webarq\Site\Http\Controllers\Controller;
 use Webarq\Site\Models\Setting;
-use Webarq\Site\ResourceHandler;
 use Webarq\Site\Api\Response;
 use Webarq\Site\Transformers\SettingTransformer;
 
