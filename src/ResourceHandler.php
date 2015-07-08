@@ -9,7 +9,8 @@ class ResourceHandler
     public $searchableFields = [];
 
     /**
-    * When client overrides our pagination by using "offset" and/or "limit"
+    * Allow client to override the standard pagination.
+    * @return void
     */
     public function customPagination()
     {
