@@ -8,6 +8,18 @@ class Response extends EllipseSynergieResponse
 {
     public $transformer;
 
+    public function destroy($id)
+    {
+        $item = \Site\ResourceHandler::getResource()->find($id);
+
+        // 404
+        if ( ! $item)
+            return $this->errorNotFound();
+
+        $item->delete();
+        return response()->json([], 200);
+    }
+
     public function index()
     {
         // Search

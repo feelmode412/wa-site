@@ -87,6 +87,6 @@ class SettingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->response->destroy($id);
     }
 }
