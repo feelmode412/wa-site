@@ -35,6 +35,11 @@ class Response extends EllipseSynergieResponse
         }
     }
 
+    public function setResource($resource)
+    {
+        $this->resource = $resource;
+    }
+
     public function show($id)
     {
         $item = $this->resource->resource->find($id);

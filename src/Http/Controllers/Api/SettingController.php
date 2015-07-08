@@ -16,7 +16,7 @@ class SettingController extends Controller
         $resource->resource = $model;
 
         // Provide resource to response
-        $response->resource = $resource;
+        $response->setResource($resource);
 
         // Provide resource
         $this->resource = $resource;
