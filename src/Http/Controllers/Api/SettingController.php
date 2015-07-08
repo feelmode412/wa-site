@@ -15,25 +15,23 @@ class SettingController extends Controller
         // Resource model
         $resource->resource = $model;
 
-        // Resource
+        // Provide resource to response
+        $response->resource = $resource;
+
+        // Provide resource
         $this->resource = $resource;
 
-        // Response
+        // Provide transformer
+        $response->transformer = new SettingTransformer();
+
+        // Provide response
         $this->response = $response;
     }
 
     public function index()
     {
-        // Init Resource
-        $resource = $this->resource;
-        $resource->searchableFields = ['code', 'type', 'value'];
-
-        // Init Response
-        $response = $this->response;
-        $response->resource = $resource;
-        $response->transformer = new SettingTransformer();
-
-        return $response->index();
+        $this->resource->searchableFields = ['code', 'type', 'value'];
+        return $this->response->index();
     }
 
     /**
@@ -64,7 +62,7 @@ class SettingController extends Controller
      */
     public function show($id)
     {
-        //
+        return $this->response->show($id);
     }
 
     /**

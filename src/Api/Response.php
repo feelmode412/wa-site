@@ -44,4 +44,10 @@ class Response
             return $this->response->withPaginator($resourceModel, $this->transformer);
         }
     }
+
+    public function show($id)
+    {
+        $item = $this->resource->resource->find($id);
+        return $this->response->withItem($item, $this->transformer);
+    }
 }
