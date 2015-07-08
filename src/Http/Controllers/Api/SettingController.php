@@ -10,22 +10,19 @@ use Webarq\Site\Transformers\SettingTransformer;
 
 class SettingController extends Controller
 {
-    public function __construct(ResourceHandler $resource, Response $response, Setting $model)
+    public function __construct(ResourceHandler $resource, Response $response, Setting $settings)
     {
-        // Resource model
-        $resource->resource = $model;
+        $this->resource = $resource;
+        $this->response = $response;
+
+        // Set the resource from model
+        $this->resource->resource = $settings;
 
         // Provide resource to response
-        $response->setResource($resource);
-
-        // Provide resource
-        $this->resource = $resource;
+        $this->response->setResource($resource);
 
         // Provide transformer
-        $response->setTransformer(new SettingTransformer());
-
-        // Provide response
-        $this->response = $response;
+        $this->response->setTransformer(new SettingTransformer());
     }
 
     public function index()
