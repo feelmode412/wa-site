@@ -2,9 +2,9 @@
 
 namespace Webarq\Site\Http\Controllers\Api;
 
+use Webarq\Site\Api\Response;
 use Webarq\Site\Http\Controllers\Controller;
 use Webarq\Site\Models\Setting;
-use Webarq\Site\Api\Response;
 use Webarq\Site\Transformers\SettingTransformer;
 
 class SettingController extends Controller
