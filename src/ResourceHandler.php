@@ -25,7 +25,7 @@ class ResourceHandler
             $this->resource = $this->resource->take(\Input::get('limit'));
     }
 
-    public function search()
+    public function searching()
     {
         foreach ($this->searchableFields as $field) {
             if (\Input::get($field)) {
@@ -34,7 +34,7 @@ class ResourceHandler
         }
     }
 
-    public function sort()
+    public function sorting()
     {
         if ( ! \Input::get('sort'))
             return;

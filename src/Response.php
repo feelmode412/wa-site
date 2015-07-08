@@ -25,13 +25,13 @@ class Response
         $resource = $this->resource;
 
         // Search
-        $resource->search();
+        $resource->searching();
 
         // 404
         $this->handleNotFound();
 
         // Sorting
-        $resource->sort();
+        $resource->sorting();
 
         // Custom pagination
         $resource->customPagination();
