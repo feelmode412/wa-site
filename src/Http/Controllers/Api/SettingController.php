@@ -43,7 +43,7 @@ class SettingController extends Controller
      */
     public function store()
     {
-        //
+        return $this->response->store();
     }
 
     /**

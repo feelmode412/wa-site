@@ -6,6 +6,9 @@ use EllipseSynergie\ApiResponse\Laravel\Response as EllipseSynergieResponse;
 
 class Response extends EllipseSynergieResponse
 {
+
+    const CODE_CONFLICT = 'GEN-CONFLICT';
+
     public $transformer;
 
     public function destroy($id)
@@ -58,5 +61,23 @@ class Response extends EllipseSynergieResponse
             return $this->errorNotFound();
 
         return $this->withItem($item, $this->transformer);
+    }
+
+    public function store()
+    {
+        $resource = \Site\ResourceHandler::getResource();
+        $status = true;
+        try {
+            $resource->create(\Input::all());
+        }
+        catch (\Exception $e) {
+            $status = false;
+            $message = \App::environment() === 'production' ? '' : $e->getMessage();
+        }
+
+        if ( ! $status)
+            return $this->setStatusCode(409)->withError($message, self::CODE_CONFLICT);
+
+        return response()->json([], 200);
     }
 }
