@@ -4,6 +4,13 @@ namespace Webarq\Site\Api;
 
 use EllipseSynergie\ApiResponse\Laravel\Response as EllipseSynergieResponse;
 
+/**
+* The API Response Class
+*
+* @package Webarq\Site
+* @author Qosdil A. <qosdil@gmail.com>
+* @todo create prepareItem() or something to refactor several methods
+*/
 class Response extends EllipseSynergieResponse
 {
 
