@@ -76,7 +76,7 @@ class SettingController extends Controller
      */
     public function update($id)
     {
-        //
+        return $this->response->update($id);
     }
 
     /**

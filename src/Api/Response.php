@@ -80,4 +80,36 @@ class Response extends EllipseSynergieResponse
 
         return response()->json([], 200);
     }
+
+    public function update($id)
+    {
+        $item = \Site\ResourceHandler::getResource()->find($id);
+
+        // 404
+        if ( ! $item)
+            return $this->errorNotFound();
+
+        foreach (\Input::all() as $field => $value) {
+
+            // Skip unknown fields
+            if ( ! $item->{$field})
+                continue;
+
+            $item->{$field} = $value;
+        }
+
+        $status = true;
+        try {
+            $item->update();
+        }
+        catch (\Exception $e) {
+            $status = false;
+            $message = (\App::environment() === 'production') ? parent::CODE_WRONG_ARGS : $e->getMessage();
+        }
+
+        if ( ! $status)
+            return $this->errorWrongArgs($message);
+
+        return response()->json([], 200);
+    }
 }
