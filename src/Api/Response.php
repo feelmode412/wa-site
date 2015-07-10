@@ -68,7 +68,7 @@ class Response extends EllipseSynergieResponse
         $resource = \Site\ResourceHandler::getResource();
         $status = true;
         try {
-            $resource->create(\Input::all());
+            $item = $resource->create(\Input::all());
         }
         catch (\Exception $e) {
             $status = false;
@@ -78,7 +78,7 @@ class Response extends EllipseSynergieResponse
         if ( ! $status)
             return $this->setStatusCode(409)->withError($message, self::CODE_CONFLICT);
 
-        return response()->json([], 200);
+        return $this->withItem($item, $this->transformer);
     }
 
     public function update($id)
@@ -110,6 +110,6 @@ class Response extends EllipseSynergieResponse
         if ( ! $status)
             return $this->errorWrongArgs($message);
 
-        return response()->json([], 200);
+        return $this->withItem($item, $this->transformer);
     }
 }
