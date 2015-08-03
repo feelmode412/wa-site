@@ -1,7 +1,7 @@
 <?php namespace Webarq\Site;
 
 // Laravel's
-use Config, Mail, Route;
+use Config, Input, Mail, Route;
 
 // Packages
 use MatthiasMullie\Minify;
@@ -10,8 +10,7 @@ class Site {
 
 	public function appendCurrentUrl($options = array())
 	{
-		parse_str($_SERVER['QUERY_STRING'], $parsedStr);
-		$queryStrings = array_merge($parsedStr, $options);
+		$queryStrings = array_merge(Input::all(), $options);
 
 		return \URL::current().'?'.http_build_query($queryStrings);
 	}
