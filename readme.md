@@ -4,8 +4,9 @@
 A Laravel 5 package contains stuff regularly used in WEBARQ's web application projects.
 
 ## Included Packages
-- Illuminate/Support
-- Intervention/Image
+- Cartalyst/Sentinel v2.0.x
+- Illuminate/Support v5.1.x
+- Intervention/Image v2.2.x
 
 ## Installation
 
