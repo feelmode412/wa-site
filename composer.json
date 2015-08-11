@@ -8,6 +8,7 @@
         }
     ],
     "require": {
+        "cartalyst/sentinel": "2.0.*",
         "illuminate/support": "5.1.*",
         "intervention/image": "2.2.*",
         "ellipsesynergie/api-response": "v0.10.0"
