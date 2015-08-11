@@ -35,6 +35,7 @@ A Laravel 5 package contains stuff regularly used in WEBARQ's web application pr
 			// Others...
 			
 			// Additionals
+			Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
 			Illuminate\Html\HtmlServiceProvider::class,
 			Webarq\Site\Providers\SiteServiceProvider::class,
 		];
@@ -46,6 +47,11 @@ A Laravel 5 package contains stuff regularly used in WEBARQ's web application pr
 			'Form' => Illuminate\Html\FormFacade::class,
 			'HTML' => Illuminate\Html\HtmlFacade::class,
 			'Site' => Webarq\Site\Support\Facades\Site::class,
+			
+			// Additionals for Sentinel
+			'Activation' => Cartalyst\Sentinel\Laravel\Facades\Activation::class,
+			'Reminder'   => Cartalyst\Sentinel\Laravel\Facades\Reminder::class,
+			'Sentinel'   => Cartalyst\Sentinel\Laravel\Facades\Sentinel::class,
 		];
 		
 ### Publish Migrations
