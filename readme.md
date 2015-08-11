@@ -65,7 +65,7 @@ A Laravel 5 package contains stuff regularly used in WEBARQ's web application pr
 
 You may need to add the scripts to your `layouts.master.php` file:
 
-	{{ View::make('site::js_helpers') }}
+	{!! view('site::js_helpers') !!}
  
 ***
 &copy; 2014 - 2015 [Web Architect Technology, PT](http://www.webarq.com/)
