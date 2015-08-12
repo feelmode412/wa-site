@@ -46,7 +46,7 @@ class Response extends EllipseSynergieResponse
         \Site\ResourceHandler::customPagination();
 
         $resource = \Site\ResourceHandler::getResource();
-        if (\Input::get('offset') || \Input::get('limit') || \Site\ResourceHandler::getOffset() !== null) {
+        if (\Input::get('offset') || \Input::get('limit')) {
             return $this->withCollection($resource->get(), $this->transformer);
         } else {
             $resource = $resource->paginate(\Site\ResourceHandler::getPerPage());

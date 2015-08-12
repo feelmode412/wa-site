@@ -4,7 +4,6 @@ namespace Webarq\Site;
 
 class ResourceHandler
 {
-    public $offset = null;
     public $perPage = 10;
     public $resource;
     public $searchableFields = [];
@@ -18,9 +17,6 @@ class ResourceHandler
         if (\Input::get('page'))
             return;
 
-        if ($this->offset !== null)
-            $this->resource = $this->resource->skip($this->offset)->take($this->perPage);
-
         // Offset
         if (\Input::get('offset'))
             $this->resource = $this->resource->skip(\Input::get('offset'));
@@ -28,11 +24,6 @@ class ResourceHandler
         // Limit
         if (\Input::get('limit'))
             $this->resource = $this->resource->take(\Input::get('limit'));
-    }
-
-    public function getOffset()
-    {
-        return $this->offset;
     }
 
     public function getPerPage()
@@ -52,16 +43,6 @@ class ResourceHandler
                 $this->resource = $this->resource->where($field, \Input::get($field));
             }
         }
-    }
-
-    public function setOffset($offset)
-    {
-        $this->offset = $offset;
-    }
-
-    public function setPerPage($perPage)
-    {
-        $this->perPage = $perPage;
     }
 
     public function setResource($resource)
